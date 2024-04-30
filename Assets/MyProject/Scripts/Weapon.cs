@@ -8,4 +8,5 @@ public class Weapon : ScriptableObject
     public float Damage;
     public float Radius;
     public GameObject Prefab;
+    public AnimatorOverrideController OverrideController;
 }

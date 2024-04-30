@@ -7,7 +7,7 @@ public class Attack : MonoBehaviour
     [SerializeField] private Weapon Weapon;
     [SerializeField] private Transform hand;
 
-    private float attackTime;
+    private float attackTime = 0;
     private Collider[] enemies = new Collider[3];
     private Health health;
     private bool CanAttack => attackTime <= 0;
@@ -15,9 +15,11 @@ public class Attack : MonoBehaviour
 
     private void Start()
     {
-        ResetTime();
         health = GetComponent<Health>();
         Instantiate(Weapon.Prefab, hand);
+
+        if (Weapon.OverrideController != null)
+            Animator.runtimeAnimatorController = Weapon.OverrideController;
     }
 
     public bool TargetInRange(Transform target) =>

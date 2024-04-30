@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41577ad136e268a459abbd480e5de001, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
-  AttackCD: 3
-  Damage: 50
-  Radius: 3
+  AttackCD: 2
+  Damage: 30
+  Radius: 2
   Prefab: {fileID: 8203073568141072114, guid: fab6a5604232ff742934ce5476c98499, type: 3}

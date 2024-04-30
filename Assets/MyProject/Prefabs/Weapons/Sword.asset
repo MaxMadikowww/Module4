@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41577ad136e268a459abbd480e5de001, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  AttackCD: 2
+  AttackCD: 1.5
   Damage: 25
   Radius: 2
   Prefab: {fileID: 3023587196320331052, guid: 4282c130d5113c74fa17e11d030c0974, type: 3}
+  OverrideController: {fileID: 22100000, guid: 66800b20e378cc14a9a8f088de10bf00, type: 2}

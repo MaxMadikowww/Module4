@@ -15,7 +15,7 @@ public class RangeNavMover : MonoBehaviour
 
     private void Start()
     {
-        player = FindAnyObjectByType<PlayerMovement>().gameObject.transform;
+        player = FindAnyObjectByType<Player>().gameObject.transform;
         health = GetComponent<Health>();
     }
     private void Update()
