@@ -6,10 +6,11 @@ public class EnemyBrain : MonoBehaviour
 {
     [SerializeField] private Health health;
     [SerializeField] private MelleNavMover mover;
-    [SerializeField] private EnemyAttacker attacker;
-    [SerializeField] private float MaxVisibleDistance;
-    [SerializeField] private float KoefficentOfSpeed;
-    [SerializeField] private float timerCount;
+    [SerializeField] private Attack attacker;
+
+    [SerializeField] private float MaxVisibleDistance; //Зона видимости врага
+    [SerializeField] private float KoefficentOfSpeed; //То, как далеко будет идти враг во время патруля
+    [SerializeField] private float timerCount; //То, какой промежуток времени будет между патрулями
 
     private Health player;
 
@@ -25,40 +26,54 @@ public class EnemyBrain : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < MaxVisibleDistance)
+        if (player != null) 
         {
-            if (attacker.TargetInRange(player.transform))
+            if (Vector3.Distance(player.transform.position, transform.position) < MaxVisibleDistance)
             {
-                mover.Stop();
-                attacker.Attack();
+                if (attacker.TargetInRange(player.transform))
+                {
+                    mover.Stop();
+                    attacker.Attacking();
+                }
+                else
+                {
+                    if (mover.TimeToSetDestination())
+                    {
+                        mover.MoveTo(player.transform.position);
+                    }
+                }
+                Event = 1;
+                ResetTimer();
             }
             else
             {
-                mover.MoveTo(player.transform.position);
+                StopAndPatrule();
             }
-            Event = 1;
-            ResetTimer();
         }
         else
         {
-            if (Event == 1) 
+            player = FindAnyObjectByType<PlayerMovement>().GetComponent<Health>();
+        }
+    }
+    private void StopAndPatrule()
+    {
+        if (Event == 1)
+        {
+            mover.Stop();
+            RemoveTimer();
+            if (timer < 0)
             {
-                mover.Stop();
-                RemoveTimer();
-                if (timer < 0)
-                {
-                    Event = 2;
-                }
+                Event = 2;
             }
-            if (Event == 2) 
+        }
+        if (Event == 2)
+        {
+            if (timer < 0)
             {
-                if (timer < 0)
-                {
-                    mover.MoveTo(GetDirection());
-                    ResetTimer();
-                }
-                RemoveTimer();
+                mover.MoveTo(GetDirection());
+                ResetTimer();
             }
+            RemoveTimer();
         }
     }
     private void ResetTimer() => timer = timerCount;

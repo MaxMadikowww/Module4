@@ -3741,10 +3741,10 @@ GameObject:
   - component: {fileID: 2205308182476914092}
   - component: {fileID: 4256718706249677693}
   - component: {fileID: 2765790934046494793}
-  - component: {fileID: 8230198791494543557}
   - component: {fileID: 628662110584865274}
+  - component: {fileID: 1467695634838234475}
+  - component: {fileID: 8230198791494543557}
   - component: {fileID: 3686179679636334961}
-  - component: {fileID: 3077677854562446657}
   m_Layer: 3
   m_Name: Bot
   m_TagString: Untagged
@@ -3865,22 +3865,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8230198791494543557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5065265591373105600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff91063b3bbe68d4ba4d761fd7132e14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Animator: {fileID: 8087331679850392862}
-  currentHealth: 100
-  maxHealth: 100
-  timeAfterDead: 10
 --- !u!114 &628662110584865274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3897,6 +3881,41 @@ MonoBehaviour:
   Animator: {fileID: 8087331679850392862}
   rigid: {fileID: 4256718706249677693}
   range: 1.9
+--- !u!114 &1467695634838234475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5065265591373105600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0155ff0fda8398469dfcc4c6f09e140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 8087331679850392862}
+  attackCD: 3
+  damage: 25
+  radius: 1.9
+  attackedMask:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &8230198791494543557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5065265591373105600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff91063b3bbe68d4ba4d761fd7132e14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 8087331679850392862}
+  currentHealth: 100
+  maxHealth: 100
+  timeAfterDead: 10
 --- !u!114 &3686179679636334961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3911,30 +3930,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 8230198791494543557}
   mover: {fileID: 628662110584865274}
-  attacker: {fileID: 3077677854562446657}
+  attacker: {fileID: 1467695634838234475}
   MaxVisibleDistance: 10
   KoefficentOfSpeed: 10
   timerCount: 5
---- !u!114 &3077677854562446657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5065265591373105600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a4aa77d9a51b7e49b26d7108533142c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Animator: {fileID: 8087331679850392862}
-  attackCD: 3
-  damage: 30
-  radius: 1.9
-  attackedMask:
-    serializedVersion: 2
-    m_Bits: 64
-  input: {fileID: 0}
 --- !u!1 &5105417695347164429
 GameObject:
   m_ObjectHideFlags: 0

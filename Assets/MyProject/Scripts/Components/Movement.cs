@@ -1,4 +1,3 @@
-using Assets.MyProject.Scripts;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -7,36 +6,38 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float Speed;
     [SerializeField] private float Sensitivity;
     [SerializeField] private Animator Animator;
-    [SerializeField] private InputManager inputM;
 
     private Health health;
 
     private void Start() => health = GetComponent<Health>();
 
-    private void FixedUpdate()
-    {
-        Move();
-        Rotate();
-    }
-    private void Move()
+    private void Update() => Rotate();
+
+    public void Move(Vector3 input)
     {
         if (!health.isDead)
         {
-            if (inputM.Motion.sqrMagnitude > 0.05f)
+            if (input.sqrMagnitude > 0.05f)
             {
-                var direction = transform.TransformDirection(inputM.Motion);
-                direction.Normalize();
-                direction += Physics.gravity;
-
-                control.Move(direction * Speed * Time.deltaTime);
-                Animator.SetFloat("Movement", control.velocity.magnitude);
+                MoveTo(input);
             }
             else
             {
-                Animator.SetFloat("Movement", 0);
+                SetAnimatorSpeed(0);
             }
         }
     }
+
+    private void MoveTo(Vector3 input)
+    {
+        var direction = transform.TransformDirection(input);
+        direction.Normalize();
+        direction += Physics.gravity;
+
+        control.Move(direction * Speed * Time.deltaTime);
+        SetAnimatorSpeed(control.velocity.magnitude);
+    }
+
     private void Rotate()
     {
         if (!health.isDead)
@@ -45,5 +46,9 @@ public class PlayerMovement : MonoBehaviour
 
             transform.Rotate(Vector3.up * mouseX);
         }
+    }
+    private void SetAnimatorSpeed(float speed)
+    {
+        Animator.SetFloat("Movement", speed);
     }
 }

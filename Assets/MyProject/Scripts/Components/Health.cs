@@ -24,7 +24,7 @@ public class Health : MonoBehaviour
     public void GetDamage(float damage)
     {
         currentHealth -= damage;
-        if (currentHealth < 0) Die();
+        if (currentHealth <= 0) Die();
     }
     private void Die()
     {

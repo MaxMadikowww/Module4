@@ -1,10 +1,9 @@
-using Assets.MyProject.Scripts;
 using UnityEngine;
 
-public class PlayerInput : InputManager
+public class InputMeneger : MonoBehaviour
 {
-    public override bool AttackPressed {  get; protected set; }
-    public override Vector3 Motion {  get; protected set; }
+    public bool AttackPressed {  get; private set; }
+    public Vector3 Motion {  get; private set; }
 
     private void Update()
     {

@@ -534,6 +534,7 @@ GameObject:
   - component: {fileID: 4365984653253158401}
   - component: {fileID: 3703423018605976320}
   - component: {fileID: 8502433882205946116}
+  - component: {fileID: 2999748542995723515}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -623,7 +624,6 @@ MonoBehaviour:
   Speed: 5
   Sensitivity: 3
   Animator: {fileID: 6972560287058637558}
-  inputM: {fileID: 0}
 --- !u!114 &4365984653253158401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,7 +643,6 @@ MonoBehaviour:
   attackedMask:
     serializedVersion: 2
     m_Bits: 8
-  input: {fileID: 0}
 --- !u!114 &3703423018605976320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,6 +671,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80556492d93c24046ae54b278dd6039b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2999748542995723515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079440242850486895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d2d7eb669206e749bec27eba7ddfe74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 3703423018605976320}
+  mover: {fileID: 1842031856758910851}
+  attacker: {fileID: 4365984653253158401}
+  input: {fileID: 8502433882205946116}
 --- !u!1 &1122809988611527647
 GameObject:
   m_ObjectHideFlags: 0
