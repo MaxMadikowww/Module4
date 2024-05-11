@@ -7,6 +7,7 @@ public class EnemyBrain : MonoBehaviour
     [SerializeField] private Health health;
     [SerializeField] private MelleNavMover mover;
     [SerializeField] private Attack attacker;
+    [SerializeField] private Role role;
 
     [SerializeField] private float MaxVisibleDistance; //Зона видимости врага
     [SerializeField] private float KoefficentOfSpeed; //То, как далеко будет идти враг во время патруля
@@ -20,7 +21,9 @@ public class EnemyBrain : MonoBehaviour
 
     private void Start()
     {
-        player = FindAnyObjectByType<PlayerMovement>().GetComponent<Health>();
+        player = FindAnyObjectByType<Player>().GetComponent<Health>();
+        health.Init(role.Health);
+        attacker.Init(role.Weapon);
         ResetTimer();
     }
 
@@ -52,7 +55,7 @@ public class EnemyBrain : MonoBehaviour
         }
         else
         {
-            player = FindAnyObjectByType<PlayerMovement>().GetComponent<Health>();
+            player = FindAnyObjectByType<Player>().GetComponent<Health>();
         }
     }
     private void StopAndPatrule()

@@ -4,8 +4,8 @@ public class Attack : MonoBehaviour
 {
     [SerializeField] private Animator Animator;
     [SerializeField] private LayerMask attackedMask;
-    [SerializeField] private Weapon Weapon;
     [SerializeField] private Transform hand;
+    private Weapon weapon;
 
     private float attackTime = 0;
     private Collider[] enemies = new Collider[3];
@@ -13,17 +13,19 @@ public class Attack : MonoBehaviour
     private bool CanAttack => attackTime <= 0;
     public bool IsAttacking { get; private set; }
 
-    private void Start()
+    public void Init(Weapon weapon)
     {
-        health = GetComponent<Health>();
-        Instantiate(Weapon.Prefab, hand);
+        this.weapon = weapon;
 
-        if (Weapon.OverrideController != null)
-            Animator.runtimeAnimatorController = Weapon.OverrideController;
+        health = GetComponent<Health>();
+        Instantiate(this.weapon.Prefab, hand);
+
+        if (this.weapon.OverrideController != null)
+            Animator.runtimeAnimatorController = this.weapon.OverrideController;
     }
 
     public bool TargetInRange(Transform target) =>
-        Vector3.Distance(transform.position, target.position) < Weapon.Radius;
+        Vector3.Distance(transform.position, target.position) < weapon.Radius;
 
     public void Attacking()
     {
@@ -40,7 +42,7 @@ public class Attack : MonoBehaviour
     private void Update()
     {
         attackTime -= Time.deltaTime;
-        IsAttacking = Weapon.AttackCD - attackTime < 1.4f;
+        IsAttacking = weapon.AttackCD - attackTime < 1.4f;
     }
 
     private void AnimateAttack()
@@ -50,10 +52,10 @@ public class Attack : MonoBehaviour
         Animator.SetInteger("AttackIndex", variation);
     }
 
-    private void ResetTime() => attackTime = Weapon.AttackCD;
+    private void ResetTime() => attackTime = weapon.AttackCD;
     private void AttackNearEnemies()
     {
-        int count = Physics.OverlapSphereNonAlloc(transform.position, Weapon.Radius, enemies, attackedMask);
+        int count = Physics.OverlapSphereNonAlloc(transform.position, weapon.Radius, enemies, attackedMask);
         if (count > 0)
         {
             for (int i = 0; i < enemies.Length; i++)
@@ -62,7 +64,7 @@ public class Attack : MonoBehaviour
                 {
                     if (enemies[i].TryGetComponent<Health>(out var component))
                     {
-                        component.GetDamage(Weapon.Damage);
+                        component.GetDamage(weapon.Damage);
                     }
                 }
             }

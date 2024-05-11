@@ -5,15 +5,12 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private Animator Animator;
     [SerializeField] public float currentHealth;
-    [SerializeField] private float maxHealth;
     [SerializeField] private float timeAfterDead = 5;
 
     [NonSerialized] public bool isDead;
 
-    private void Start()
-    {
-        currentHealth = maxHealth;
-    }
+    public void Init(float maxHealth) => currentHealth = maxHealth;
+    
     private void Update()
     {
         if (isDead)
@@ -24,6 +21,8 @@ public class Health : MonoBehaviour
     public void GetDamage(float damage)
     {
         currentHealth -= damage;
+        Animator.SetTrigger("IsAttackedBy");
+
         if (currentHealth <= 0) Die();
     }
     private void Die()
